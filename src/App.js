@@ -9,6 +9,8 @@ import Cart from "./components/Cart";
 import Wallet from "./components/Wallet";
 import ViewDetails from "./components/ViewDetails";
 import Intro from "./components/Intro";
+import Admin from "./components/Admin";
+import EditItem from "./components/EditItem";
 
 function App() {
   return (
@@ -16,6 +18,9 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
+          <Route path="/oops-project" element={<Intro />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/Edit" element={<EditItem />} />
           <Route path="/" element={<Intro />} />
           <Route path="/Details" element={<ViewDetails />} />
           <Route path="/Home" element={<HomePage />} />

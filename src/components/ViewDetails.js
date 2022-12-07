@@ -6,38 +6,47 @@ export class ViewDetails extends Component {
         super();
         this.state = {
             items: [],
-            updating: false,
             message: { display: "none" },
-            pageNo: 1,
             image: [],
+            id: 0,
+            count: localStorage.getItem("trueIndex")
         };
     }
 
     async componentDidMount() {
-        let url = "https://api.escuelajs.co/api/v1/products?offset=0&limit=10";
-        this.setState({ updating: true })
+        let url = "http://localhost:8093/api/Items";
         let data = await fetch(url);
         let finalData = await data.json();
         for (const item in finalData) {
             if (Object.hasOwnProperty.call(finalData, item)) {
                 const element = finalData[item];
                 if (element.id == localStorage.getItem("tempthis")) {
-                    this.setState({ items: element, image: element.images })
-
-                    localStorage.clear();
+                    this.setState({ items: element, image: element.image, id: element.id })
+                    localStorage.removeItem("tempthis")
                     break
                 }
             }
         }
-
-        this.setState({ updating: false })
-
     }
     addedItem = () => {
         this.setState({ message: { display: "block" } })
         setTimeout(() => {
             this.setState({ message: { display: "none" } })
         }, 1500);
+
+        let cartItem = [this.state.items.name, this.state.items.price, this.state.image, this.state.id]
+        let tempo = JSON.parse(localStorage.getItem("user"))
+        if (tempo.cart.length == 0) {
+            tempo.cart = []
+            tempo.cart.push(cartItem)
+            tempo.cartTotal = this.state.items.price
+        }
+        else {
+            tempo.cart.push(cartItem)
+            tempo.cartTotal += this.state.items.price
+        }
+        localStorage.setItem("user", JSON.stringify(tempo))
+
     }
 
     render() {
@@ -88,13 +97,12 @@ export class ViewDetails extends Component {
                     Your Item has been successfully added to cart.
                 </div>
                 <div style={title}>
-                    {this.state.items.title}
-
+                    {this.state.items.name}
                 </div>
                 <div style={flex}>
 
                     <div style={imageStyle}>
-                        <img src={this.state.image[1]} alt="" />
+                        <img src={this.state.image} alt="" />
 
                     </div>
                     <div style={flex2}>

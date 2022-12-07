@@ -3,6 +3,29 @@ import { Link, Outlet } from 'react-router-dom'
 
 
 export class Navbar extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            display: "block",
+            logout: "none"
+
+        }
+    }
+
+    async componentDidMount() {
+        if (localStorage.getItem("loginCheck") == "true") {
+            this.setState({ display: "none" })
+            this.setState({ logout: "block" })
+        }
+    }
+
+    logoutClick = () => {
+        localStorage.setItem("loginCheck", "false")
+        this.setState({ display: "block" })
+        this.setState({ logout: "none" })
+        window.location.reload()
+    }
     render() {
 
         const mystyle = {
@@ -29,8 +52,31 @@ export class Navbar extends Component {
                                 <li className="nav-item">
                                     <Link className="nav-link active" aria-current="page" to="/Home">Home</Link>
                                 </li>
-                                <li className="nav-item">
+                                <li className="nav-item" style={{ display: this.state.display }}>
                                     <Link className="nav-link" to="/Login">Login/SignUp</Link>
+                                </li>
+                                <li className="nav-item" style={{ display: this.state.logout }}>
+                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                        Logout
+                                    </button>
+
+                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirmation</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to Logout?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="button" class="btn btn-dark" onClick={() => { this.logoutClick() }}>Logout</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </li>
 
                                 <input className="form-control me-2" style={mystyle} type="search" placeholder="Search" aria-label="Search" />

@@ -1,14 +1,124 @@
+
 import React, { Component } from 'react'
 
 export class SignUp extends Component {
     constructor() {
         super();
+        if (!localStorage.getItem("users")) {
+            let arr = []
+            localStorage.setItem("users", JSON.stringify(arr))
+        }
         this.state = {
             display: { display: "none" },
-            margin_top: "-4rem"
+            margin_top: "-4rem",
+            data: "fake"
         };
     }
 
+    Registerbtn = () => {
+        const usnm = document.getElementById('usnm').value
+        const pass = document.getElementById('pass1').value
+        const name = document.getElementById('name').value
+        const Phone = document.getElementById('Phone').value
+        const mail = document.getElementById('mail').value
+        const address = document.getElementById('address').value
+        const conpass = document.getElementById('conpass').value
+        const war1 = document.getElementById('warning')
+        const war2 = document.getElementById('danger')
+        const war3 = document.getElementById('success')
+
+        if (pass != conpass) {
+            war2.innerHTML = "Password and Confirm Password must be same."
+            war2.style.display = "block"
+            setTimeout(() => {
+                war2.style.display = "none"
+            }, 1500)
+
+            document.getElementById('close').click()
+        }
+        else if (usnm.length <= 1) {
+            war1.innerHTML = "Username Cannot Be Empty"
+            war1.style.display = "block"
+            setTimeout(() => {
+                war1.style.display = "none"
+            }, 1500)
+
+            document.getElementById('close').click()
+        }
+        else if (pass.length <= 1) {
+            war1.innerHTML = "Password Cannot Be Empty"
+            war1.style.display = "block"
+            setTimeout(() => {
+                war1.style.display = "none"
+            }, 1500)
+
+            document.getElementById('close').click()
+        } else if (name.length <= 1 || mail.length <= 1 || address.length <= 1 || Phone.length <= 1) {
+            war1.innerHTML = "Please Enter the Credentials Properly."
+            war1.style.display = "block"
+            setTimeout(() => {
+                war1.style.display = "none"
+            }, 1500)
+
+            document.getElementById('close').click()
+        }
+
+        else {
+
+            let url = "http://localhost:8093/api/addCustomer"
+            let jsonvar = {
+                "userId": usnm,
+                "password": pass,
+                "name": name,
+                "email": mail,
+                "phone": Phone,
+                "loginStatus": false,
+                "address": address,
+                "walletBalance": 1000.0,
+                "shippingInfo": null
+
+            }
+
+            fetch(url, {
+                mode: 'cors',
+                method: 'POST',
+                body: JSON.stringify(jsonvar),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+                .then((response) => response.json())
+                .then((dataa) => {
+                    console.log(dataa)
+                    this.setState({ data: dataa })
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                });
+
+            if (this.state.data == "fake") {
+                war2.innerHTML = "There was an error while registering. Please Try again"
+                war2.style.display = "block"
+                setTimeout(() => {
+                    war2.style.display = "none"
+                }, 1500)
+
+                document.getElementById('close').click()
+            } else {
+                war3.innerHTML = "Registeration Successfull! Please Login to Continue"
+                war3.style.display = "block"
+                setTimeout(() => {
+                    war3.style.display = "none"
+                }, 1500)
+
+                document.getElementById('close').click()
+            }
+
+        }
+
+
+
+    }
     myfunction = () => {
         if (this.state.display.display == "none") {
             this.setState({ display: { display: "block" }, margin_top: "-5rem" })
@@ -45,15 +155,15 @@ export class SignUp extends Component {
                 <form>
                     <div className="mb-3" >
                         <label htmlFor="exampleInputEmail1" className="form-label">Username</label>
-                        <input type="email" style={inp} aria-describedby="emailHelp" placeholder='Enter Username' />
+                        <input type="email" id="usnm" style={inp} aria-describedby="emailHelp" placeholder='Enter Username' />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                        <input type="password" style={inp} placeholder='Enter Password' />
+                        <input type="password" style={inp} id="pass1" placeholder='Enter Password' />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="exampleInputPassword1" className="form-label">Confirm Password</label>
-                        <input type="password" style={inp} placeholder='Confirm Password' />
+                        <input type="password" style={inp} id="conpass" placeholder='Confirm Password' />
                     </div>
 
                     <div className="mb-3" style={this.state.display}>
@@ -63,8 +173,43 @@ export class SignUp extends Component {
                     <input type="checkbox" className="btn-check" onClick={() => { this.myfunction() }} id="btn-check-2-outlined" />
                     <label className="btn btn-outline-secondary" htmlFor="btn-check-2-outlined">Click if you want to register as an Admin</label><br />
 
-                    <button style={{ marginTop: "1rem" }} className="btn btn-dark">Register</button>
                 </form>
+                <button type="button" class="btn btn-dark" style={{ marginTop: "2rem" }} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Continue
+                </button>
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">More Details To Register</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div className="mb-3" >
+                                    <label htmlFor="exampleInputEmail1" className="form-label">Name</label>
+                                    <input id="name" style={inp} aria-describedby="emailHelp" placeholder='Enter Your Name' />
+                                </div>
+                                <div className="mb-3" >
+                                    <label htmlFor="exampleInputEmail1" className="form-label">Phone</label>
+                                    <input id="Phone" style={inp} aria-describedby="emailHelp" placeholder='Enter Phone Number' />
+                                </div>
+                                <div className="mb-3" >
+                                    <label htmlFor="exampleInputEmail1" className="form-label">Email</label>
+                                    <input type="email" id="mail" style={inp} aria-describedby="emailHelp" placeholder='Enter Email' />
+                                </div>
+                                <div className="mb-3" >
+                                    <label htmlFor="exampleInputEmail1" className="form-label">Address</label>
+                                    <input type="email" id="address" style={inp} aria-describedby="emailHelp" placeholder='Enter Your Address' />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" id="close">Close</button>
+                                <button type="button" className="btn btn-dark" onClick={() => { this.Registerbtn() }}>Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Outlet } from 'react-router-dom';
-import ItemCard from './ItemCard';
+import AdminCard from './AdminCard';
 import LoadingLogo from './LoadingLogo';
 
-export class HomePage extends Component {
+export class Admin extends Component {
     constructor() {
         super();
         this.state = {
@@ -21,9 +21,7 @@ export class HomePage extends Component {
             items: finalData,
         })
         this.setState({ updating: false })
-
     }
-
 
 
     render() {
@@ -51,7 +49,7 @@ export class HomePage extends Component {
                             {!this.state.loading && this.state.items.map((element) => {
                                 return (
 
-                                    <ItemCard name={element.name} price={element.price} imgSrc={element.image} key={element.id} id={element.id} />
+                                    <AdminCard title={element.name} price={element.price} imgSrc={element.image} key={element.id} id={element.id} />
                                 );
                             })}
                         </div>
@@ -63,4 +61,4 @@ export class HomePage extends Component {
     }
 }
 
-export default HomePage
+export default Admin

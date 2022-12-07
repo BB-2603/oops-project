@@ -22,10 +22,13 @@ export class FirstHeader extends Component {
         }
         return (
             <>
-                <div class="alert alert-danger" id="danger" style={{ display: "none" }} role="alert">
+                <div className="alert alert-danger" id="danger" style={{ display: "none" }} role="alert">
 
                 </div>
-                <div class="alert alert-warning" id="warning" style={{ display: "none" }} role="alert">
+                <div className="alert alert-warning" id="warning" style={{ display: "none" }} role="alert">
+
+                </div>
+                <div className="alert alert-success" id="success" style={{ display: "none" }} role="alert">
 
                 </div>
                 <div style={mystylehead}>
