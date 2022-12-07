@@ -17,6 +17,7 @@ export class SignUp extends Component {
 
     Registerbtn = () => {
         const usnm = document.getElementById('usnm').value
+        const adminkey = document.getElementById('adminkey').value
         const pass = document.getElementById('pass1').value
         const name = document.getElementById('name').value
         const Phone = document.getElementById('Phone').value
@@ -26,6 +27,7 @@ export class SignUp extends Component {
         const war1 = document.getElementById('warning')
         const war2 = document.getElementById('danger')
         const war3 = document.getElementById('success')
+
 
         if (pass != conpass) {
             war2.innerHTML = "Password and Confirm Password must be same."
@@ -64,59 +66,107 @@ export class SignUp extends Component {
         }
 
         else {
+            if (adminkey == "") {
 
-            let url = "http://localhost:8093/api/addCustomer"
-            let jsonvar = {
-                "userId": usnm,
-                "password": pass,
-                "name": name,
-                "email": mail,
-                "phone": Phone,
-                "loginStatus": false,
-                "address": address,
-                "walletBalance": 1000.0,
-                "shippingInfo": null
+                let url = "http://localhost:8093/api/addCustomer"
+                let jsonvar = {
+                    "userId": usnm,
+                    "password": pass,
+                    "name": name,
+                    "email": mail,
+                    "phone": Phone,
+                    "loginStatus": false,
+                    "address": address,
+                    "walletBalance": 1000.0,
+                    "shippingInfo": null
 
-            }
+                }
 
-            fetch(url, {
-                mode: 'cors',
-                method: 'POST',
-                body: JSON.stringify(jsonvar),
-                headers: {
-                    'Content-type': 'application/json; charset=UTF-8',
-                },
-            })
-                .then((response) => response.json())
-                .then((dataa) => {
-                    console.log(dataa)
-                    this.setState({ data: dataa })
+                fetch(url, {
+                    mode: 'cors',
+                    method: 'POST',
+                    body: JSON.stringify(jsonvar),
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8',
+                    },
                 })
-                .catch((err) => {
-                    console.log(err.message);
-                });
+                    .then((response) => response.json())
+                    .then((dataa) => {
+                        this.setState({ data: dataa })
+                    })
+                    .catch((err) => {
+                        console.log(err.message);
+                    });
 
-            if (this.state.data == "fake") {
-                war2.innerHTML = "There was an error while registering. Please Try again"
-                war2.style.display = "block"
-                setTimeout(() => {
-                    war2.style.display = "none"
-                }, 1500)
+                if (this.state.data == "fake") {
+                    war2.innerHTML = "There was an error while registering. Please Try again"
+                    war2.style.display = "block"
+                    setTimeout(() => {
+                        war2.style.display = "none"
+                    }, 1500)
 
-                document.getElementById('close').click()
+                    document.getElementById('close').click()
+                } else {
+                    war3.innerHTML = "Registeration Successfull! Please Login to Continue"
+                    war3.style.display = "block"
+                    setTimeout(() => {
+                        war3.style.display = "none"
+                    }, 1500)
+
+                    document.getElementById('close').click()
+                }
             } else {
-                war3.innerHTML = "Registeration Successfull! Please Login to Continue"
-                war3.style.display = "block"
-                setTimeout(() => {
-                    war3.style.display = "none"
-                }, 1500)
+                let url = "http://localhost:8093/api/registeradmin"
+                let jsonvar = {
+                    "userId": usnm,
+                    "password": pass,
+                    "name": name,
+                    "email": mail,
+                    "phone": Phone,
+                    "loginStatus": false,
+                    "adminkey": adminkey
 
-                document.getElementById('close').click()
+                }
+                fetch(url, {
+                    mode: 'cors',
+                    method: 'POST',
+                    body: JSON.stringify(jsonvar),
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8',
+                    },
+                })
+                    .then((response) => response.json())
+                    .then((dataa) => {
+                        console.log(dataa)
+                        this.setState({ data: dataa })
+                    })
+                    .catch((err) => {
+                        console.log(err.message);
+                    });
+
+                if (this.state.data == "fake") {
+                    war2.innerHTML = "There was an error while registering. Please Try again"
+                    war2.style.display = "block"
+                    setTimeout(() => {
+                        war2.style.display = "none"
+                    }, 1500)
+
+                    document.getElementById('close').click()
+                } else {
+                    war3.innerHTML = "Registeration Successfull! Please Login to Continue"
+                    war3.style.display = "block"
+                    setTimeout(() => {
+                        war3.style.display = "none"
+                    }, 1500)
+
+                    document.getElementById('close').click()
+
+                }
+
+
             }
 
         }
-
-
 
     }
     myfunction = () => {
@@ -168,7 +218,7 @@ export class SignUp extends Component {
 
                     <div className="mb-3" style={this.state.display}>
                         <label htmlFor="exampleInputPassword1" className="form-label">AdminKey</label>
-                        <input type="password" style={inp} placeholder='(Given By previous admin)' />
+                        <input type="password" id="adminkey" style={inp} placeholder='(Given By previous admin)' />
                     </div>
                     <input type="checkbox" className="btn-check" onClick={() => { this.myfunction() }} id="btn-check-2-outlined" />
                     <label className="btn btn-outline-secondary" htmlFor="btn-check-2-outlined">Click if you want to register as an Admin</label><br />

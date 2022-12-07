@@ -8,6 +8,90 @@ export class AdminCard extends Component {
         localStorage.setItem("tempthis", element)
 
     };
+
+    changeItem = (element) => {
+        let url = "http://localhost:8093/api/Items/modify"
+        let name = document.getElementById('Itemname').value
+        let price = document.getElementById('pricee').value
+        let quantity = document.getElementById('Quantity').value
+        let descri = document.getElementById('Description').value
+        let img = document.getElementById('ImgLink').value
+        let adminobj = JSON.parse(localStorage.getItem("admin"))
+
+        let jsonvar = {
+            "item": {
+                "id": element,
+                "name": name,
+                "price": price,
+                "quantity": quantity,
+                "description": descri,
+                "image": img
+            },
+
+            "Admin": adminobj
+        }
+
+        fetch(url, {
+            mode: 'cors',
+            method: 'POST',
+            body: JSON.stringify(jsonvar),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                this.setState({ data: data })
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+
+
+        window.location.reload()
+
+    }
+
+    deleteItem = (element) => {
+        let url = `http://localhost:8093/api/Items/${element}`
+        let adminobj = JSON.parse(localStorage.getItem("admin"))
+        fetch(url).then((response) => response.json())
+            .then((data) => {
+
+                let Url = "http://localhost:8093/api/Items/delete"
+
+                let jsonvar = {
+                    "item": data,
+                    "Admin": adminobj
+                }
+
+                console.log(jsonvar);
+                fetch(Url, {
+                    mode: 'cors',
+                    method: 'POST',
+                    body: JSON.stringify(jsonvar),
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8',
+                    },
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+
+                    })
+                    .catch((err) => {
+                        console.log(err.message);
+                    });
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+
+
+
+        window.location.reload()
+
+    }
     render() {
         let { imgSrc, title, price, id } = this.props;
 
@@ -60,9 +144,9 @@ export class AdminCard extends Component {
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-dark">Save changes</button>
-                                        <button type="button" class="btn btn-danger">Delete Item</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="Clse">Cancel</button>
+                                        <button type="button" class="btn btn-dark" onClick={() => this.changeItem(id)}>Save changes</button>
+                                        <button type="button" class="btn btn-danger" onClick={() => this.deleteItem(id)}>Delete Item</button>
                                     </div>
                                 </div>
                             </div>
