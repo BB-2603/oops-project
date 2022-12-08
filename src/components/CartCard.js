@@ -43,7 +43,7 @@ export class CartCard extends Component {
                             <div className="card-body" style={innerTxt}>
                                 <p className="card-text">{name}</p>
                             </div>
-                            <div style={innerTxtPrice}>${price}</div>
+                            <div style={innerTxtPrice}>₹{price}</div>
                             <button type="button" id="deletebtn" style={dte} className="btn btn-secondary" onClick={() => this.deletebtn(id)}>Delete Item</button>
                         </div>
                     </div>

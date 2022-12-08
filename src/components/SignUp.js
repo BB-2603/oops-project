@@ -224,11 +224,11 @@ export class SignUp extends Component {
                     <label className="btn btn-outline-secondary" htmlFor="btn-check-2-outlined">Click if you want to register as an Admin</label><br />
 
                 </form>
-                <button type="button" class="btn btn-dark" style={{ marginTop: "2rem" }} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-dark" style={{ marginTop: "2rem" }} data-bs-toggle="modal" data-bs-target="#registerpopup">
                     Continue
                 </button>
 
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="registerpopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">

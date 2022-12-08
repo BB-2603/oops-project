@@ -3,9 +3,13 @@ import React, { Component } from "react";
 export class SignIn extends Component {
     constructor() {
         super();
-        if (!localStorage.getItem("users")) {
+        if (!localStorage.getItem("user")) {
             let arr = []
-            localStorage.setItem("users", JSON.stringify(arr))
+            localStorage.setItem("user", JSON.stringify(arr))
+        }
+        if (!localStorage.getItem("admin")) {
+            let arr = []
+            localStorage.setItem("admin", JSON.stringify(arr))
         }
         this.state = {
             display: { display: "none" },
@@ -58,6 +62,7 @@ export class SignIn extends Component {
 
             else {
                 localStorage.setItem("loginCheck", "true")
+                localStorage.setItem("logintype", "customer")
                 let obb = this.state.data
                 obb.cart = []
                 obb.cartTotal = 0
@@ -101,6 +106,7 @@ export class SignIn extends Component {
 
             else {
                 localStorage.setItem("loginCheck", "true")
+                localStorage.setItem("logintype", "admin")
                 localStorage.setItem("admin", JSON.stringify(this.state.data))
                 window.location.assign("http://localhost:3000/admin")
             }

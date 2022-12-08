@@ -10,6 +10,7 @@ import Wallet from "./components/Wallet";
 import ViewDetails from "./components/ViewDetails";
 import Intro from "./components/Intro";
 import Admin from "./components/Admin";
+import Users from "./components/Users";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/oops-project" element={<Intro />} />
+          <Route path="/Users" element={<Users />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/" element={<Intro />} />
           <Route path="/Details" element={<ViewDetails />} />

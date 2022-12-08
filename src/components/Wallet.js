@@ -48,11 +48,13 @@ export class Wallet extends Component {
         const desc = {
             fontSize: "1.5rem",
             margin: "2rem",
+            marginLeft: "3.5rem",
             marginTop: "0rem"
         }
         const amt = {
 
-            fontSize: "1.5rem"
+            fontSize: "1.5rem",
+            marginLeft: "2rem"
 
         }
 
@@ -68,16 +70,16 @@ export class Wallet extends Component {
                 </div>
                 <div style={centerStyle} id="temp1">
 
-                    <div style={usStyle}> Hello {this.state.ran.userId}.</div>
+                    <div style={usStyle}> Hello {this.state.ran.name}.</div>
                     <div style={desc}>Your current wallet has</div>
-                    <div style={amt}> ${this.state.ran.walletBalance}</div>
+                    <div style={amt}> ₹{this.state.ran.walletBalance}</div>
 
 
-                    <button type="button" style={moneyStyle} class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" style={moneyStyle} class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addMON">
                         Add Money
                     </button>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="addMON" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">

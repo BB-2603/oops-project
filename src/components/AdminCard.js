@@ -53,45 +53,7 @@ export class AdminCard extends Component {
 
     }
 
-    deleteItem = (element) => {
-        let url = `http://localhost:8093/api/Items/${element}`
-        let adminobj = JSON.parse(localStorage.getItem("admin"))
-        fetch(url).then((response) => response.json())
-            .then((data) => {
 
-                let Url = "http://localhost:8093/api/Items/delete"
-
-                let jsonvar = {
-                    "item": data,
-                    "Admin": adminobj
-                }
-
-                console.log(jsonvar);
-                fetch(Url, {
-                    mode: 'cors',
-                    method: 'POST',
-                    body: JSON.stringify(jsonvar),
-                    headers: {
-                        'Content-type': 'application/json; charset=UTF-8',
-                    },
-                })
-                    .then((response) => response.json())
-                    .then((data) => {
-
-                    })
-                    .catch((err) => {
-                        console.log(err.message);
-                    });
-            })
-            .catch((err) => {
-                console.log(err.message);
-            });
-
-
-
-        window.location.reload()
-
-    }
     render() {
         let { imgSrc, title, price, id } = this.props;
 
@@ -109,12 +71,12 @@ export class AdminCard extends Component {
                     <img src={imgSrc} className="card-img-top" alt="..." width="500" height="300" />
                     <div className="card-body">
                         <h5 className="card-title">{title}</h5>
-                        <p className="card-text">${price}</p>
+                        <p className="card-text">₹{price}</p>
                         <Link to="/Details" type="button" className="btn btn-outline-dark" onClick={() => this.detailsPage(id)}>View Details</Link>
-                        <button type="button" style={{ marginLeft: "2rem" }} class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" style={{ marginLeft: "2rem" }} class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#thisID">
                             Edit Item                        </button>
 
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="thisID" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -146,7 +108,6 @@ export class AdminCard extends Component {
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="Clse">Cancel</button>
                                         <button type="button" class="btn btn-dark" onClick={() => this.changeItem(id)}>Save changes</button>
-                                        <button type="button" class="btn btn-danger" onClick={() => this.deleteItem(id)}>Delete Item</button>
                                     </div>
                                 </div>
                             </div>

@@ -31,6 +31,49 @@ export class Cart extends Component {
 
     }
 
+    placeOrder = () => {
+        let temp = JSON.parse(localStorage.getItem("user"))
+        if (this.state.items.length == 0) {
+            const war2 = document.getElementById('Warning')
+            war2.innerHTML = "Please Add atleast one item in the cart"
+            war2.style.display = "block"
+            setTimeout(() => {
+                war2.style.display = "none"
+            }, 1500)
+            console.log("cart is empty");
+        } else if (temp.walletBalance < temp.cartTotal) {
+            const war2 = document.getElementById('Danger')
+            war2.innerHTML = "Your wallet has insufficient balance"
+            war2.style.display = "block"
+            setTimeout(() => {
+                war2.style.display = "none"
+            }, 1500)
+            console.log("Your wallet has insufficient balance");
+        }
+        else {
+            if (temp.shippingInfo == null) {
+                temp.shippingInfo = []
+                temp.shippingInfo.push(this.state.items)
+            }
+            temp.cart = []
+            let finalTotal = temp.walletBalance - temp.cartTotal
+            temp.walletBalance = finalTotal
+            temp.cartTotal = 0
+
+            localStorage.setItem("user", JSON.stringify(temp))
+            const war2 = document.getElementById('Success')
+            war2.innerHTML = "Your Order is Placed and will be delivered within 3 working days!"
+            war2.style.display = "block"
+            setTimeout(() => {
+                war2.style.display = "none"
+            }, 1500)
+
+
+            window.location.reload()
+        }
+
+    }
+
     async componentDidMount() {
         let ran = JSON.parse(localStorage.getItem("user"))
         this.setState({ items: ran.cart })
@@ -61,6 +104,16 @@ export class Cart extends Component {
         }
 
         return <>
+            <div className="alert alert-danger" id="Danger" style={{ display: "none" }} role="alert">
+
+            </div>
+            <div className="alert alert-warning" id="Warning" style={{ display: "none" }} role="alert">
+
+            </div>
+            <div className="alert alert-success" id="Success" style={{ display: "none" }} role="alert">
+
+            </div>
+
             <div id="temp4">
                 Please Login First To access the Cart.
 
@@ -81,9 +134,9 @@ export class Cart extends Component {
                     })}
                 </div>
 
-                <div style={carthead}> Cart Total: {this.state.total}</div>
+                <div style={carthead}> Cart Total: ₹{this.state.total}</div>
 
-                <button type="button" style={{ marginTop: "1rem", marginLeft: "1.5rem" }} className="btn btn-secondary" >Place Order</button>
+                <button type="button" style={{ marginTop: "1rem", marginLeft: "1.5rem" }} className="btn btn-secondary" onClick={() => { this.placeOrder() }}>Place Order</button>
 
             </div>
 

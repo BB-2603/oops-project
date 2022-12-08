@@ -23,7 +23,7 @@ export class ItemCard extends Component {
                     <img src={imgSrc} className="card-img-top" alt="..." width="500" height="300" />
                     <div className="card-body">
                         <h5 className="card-name">{name}</h5>
-                        <p className="card-text">${price}</p>
+                        <p className="card-text">₹{price}</p>
                         <Link to="/Details" type="button" className="btn btn-outline-dark" onClick={() => this.detailsPage(id)}>View Details</Link>
                     </div>
                 </div>

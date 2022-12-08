@@ -9,7 +9,6 @@ export class ViewDetails extends Component {
             message: { display: "none" },
             image: [],
             id: 0,
-            count: localStorage.getItem("trueIndex")
         };
     }
 
@@ -27,6 +26,66 @@ export class ViewDetails extends Component {
                 }
             }
         }
+        if (localStorage.getItem("loginCheck") == "false") {
+            document.getElementById('AddtoCart').style.display = "block"
+            document.getElementById('AddtoCart').disabled = "true"
+            document.getElementById('DelteItm').style.display = "none"
+
+
+        }
+
+        else if (localStorage.getItem("logintype") == "customer") {
+            document.getElementById('AddtoCart').style.display = "block"
+            document.getElementById('DelteItm').style.display = "none"
+        }
+        else if (localStorage.getItem("logintype") == "admin") {
+            document.getElementById('AddtoCart').style.display = "none"
+            document.getElementById('DelteItm').style.display = "block"
+        }
+
+
+    }
+
+    deleteItem = () => {
+        let url = `http://localhost:8093/api/Items/${this.state.id}`
+        let adminobj = JSON.parse(localStorage.getItem("admin"))
+        fetch(url).then((response) => response.json())
+            .then((data) => {
+
+                let Url = "http://localhost:8093/api/Items/delete"
+
+                let jsonvar = {
+                    "item": data,
+                    "Admin": adminobj
+                }
+
+                console.log(jsonvar);
+                fetch(Url, {
+                    mode: 'cors',
+                    method: 'POST',
+                    body: JSON.stringify(jsonvar),
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8',
+                    },
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+
+                    })
+                    .catch((err) => {
+                        console.log(err.message);
+                    });
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+
+
+        window.location.reload()
+        window.location.assign("http://localhost:3000/admin")
+
+
+
     }
     addedItem = () => {
         this.setState({ message: { display: "block" } })
@@ -113,11 +172,12 @@ export class ViewDetails extends Component {
                         </div>
 
                         <div style={priceStyle}>
-                            ${this.state.items.price}
+                            ₹{this.state.items.price}
 
                         </div>
-                        <button class="btn btn-outline-secondary" style={button} onClick={() => this.addedItem()}>Add to Cart</button>
 
+                        <button class="btn btn-outline-secondary" id="AddtoCart" style={button} onClick={() => this.addedItem()}>Add to Cart</button>
+                        <button type="button" class="btn btn-danger" id="DelteItm" style={button} onClick={() => this.deleteItem()}>Delete Item</button>
 
                     </div>
 
