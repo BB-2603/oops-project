@@ -75,23 +75,23 @@ export class Wallet extends Component {
                     <div style={amt}> ₹{this.state.ran.walletBalance}</div>
 
 
-                    <button type="button" style={moneyStyle} class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addMON">
+                    <button type="button" style={moneyStyle} className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addMON">
                         Add Money
                     </button>
 
-                    <div class="modal fade" id="addMON" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">More Details To Register</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div className="modal fade" id="addMON" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h1 className="modal-title fs-5" id="exampleModalLabel">More Details To Register</h1>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
+                                <div className="modal-body">
                                     Enter Amount: <input type="number" id="money" placeholder="Enter Amount" />
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-dark" onClick={() => this.addmoney()}>Add Amount</button>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" className="btn btn-dark" onClick={() => this.addmoney()}>Add Amount</button>
                                 </div>
                             </div>
                         </div>

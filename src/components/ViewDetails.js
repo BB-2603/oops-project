@@ -176,8 +176,8 @@ export class ViewDetails extends Component {
 
                         </div>
 
-                        <button class="btn btn-outline-secondary" id="AddtoCart" style={button} onClick={() => this.addedItem()}>Add to Cart</button>
-                        <button type="button" class="btn btn-danger" id="DelteItm" style={button} onClick={() => this.deleteItem()}>Delete Item</button>
+                        <button className="btn btn-outline-secondary" id="AddtoCart" style={button} onClick={() => this.addedItem()}>Add to Cart</button>
+                        <button type="button" className="btn btn-danger" id="DelteItm" style={button} onClick={() => this.deleteItem()}>Delete Item</button>
 
                     </div>
 

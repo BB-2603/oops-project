@@ -98,7 +98,7 @@ export class Navbar extends Component {
             width: "30rem"
         }
         const cart = {
-            marginLeft: "21rem",
+            marginLeft: "19rem",
         }
 
         const wallet = {
@@ -132,23 +132,23 @@ export class Navbar extends Component {
                                     <Link className="nav-link" to="/Login">Login/SignUp</Link>
                                 </li>
                                 <li className="nav-item" style={{ display: this.state.logout }}>
-                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <button type="button" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                         Logout
                                     </button>
 
-                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirmation</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div className="modal-dialog modal-dialog-centered">
+                                            <div className="modal-content">
+                                                <div className="modal-header">
+                                                    <h1 className="modal-title fs-5" id="staticBackdropLabel">Confirmation</h1>
+                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <div class="modal-body">
+                                                <div className="modal-body">
                                                     Are you sure you want to Logout?
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="button" class="btn btn-dark" onClick={() => { this.logoutClick() }}>Logout</button>
+                                                <div className="modal-footer">
+                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="button" className="btn btn-dark" onClick={() => { this.logoutClick() }}>Logout</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -167,17 +167,17 @@ export class Navbar extends Component {
                                 </li>
 
                                 <li>
-                                    <button type="button" style={{ marginLeft: "10rem" }} id="aDDItm" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" style={{ marginLeft: "10rem" }} id="aDDItm" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         Add Item                        </button>
 
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Credentials</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div className="modal-dialog">
+                                            <div className="modal-content">
+                                                <div className="modal-header">
+                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Add Credentials</h1>
+                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <div class="modal-body">
+                                                <div className="modal-body">
                                                     <div className="mb-3" >
                                                         <label htmlFor="exampleInputEmail1" className="form-label">Name</label>
                                                         <input id="ItemnamE" style={inp} aria-describedby="emailHelp" placeholder='Enter Item Name' />
@@ -200,9 +200,9 @@ export class Navbar extends Component {
                                                         <input id="DescriptioN" style={inp} aria-describedby="emailHelp" placeholder='Enter Description' />
                                                     </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="ClsE">Cancel</button>
-                                                    <button type="button" class="btn btn-success" onClick={() => { this.addnew() }}>Add Item</button>
+                                                <div className="modal-footer">
+                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" id="ClsE">Cancel</button>
+                                                    <button type="button" className="btn btn-success" onClick={() => { this.addnew() }}>Add Item</button>
                                                 </div>
                                             </div>
                                         </div>

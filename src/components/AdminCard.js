@@ -73,17 +73,17 @@ export class AdminCard extends Component {
                         <h5 className="card-title">{title}</h5>
                         <p className="card-text">₹{price}</p>
                         <Link to="/Details" type="button" className="btn btn-outline-dark" onClick={() => this.detailsPage(id)}>View Details</Link>
-                        <button type="button" style={{ marginLeft: "2rem" }} class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#thisID">
+                        <button type="button" style={{ marginLeft: "2rem" }} className="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#thisID">
                             Edit Item                        </button>
 
-                        <div class="modal fade" id="thisID" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Credentials</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div className="modal fade" id="thisID" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div className="modal-dialog">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Update Credentials</h1>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div className="modal-body">
                                         <div className="mb-3" >
                                             <label htmlFor="exampleInputEmail1" className="form-label">Name</label>
                                             <input id="Itemname" style={inp} aria-describedby="emailHelp" placeholder='Enter Item Name' />
@@ -105,9 +105,9 @@ export class AdminCard extends Component {
                                             <input id="Description" style={inp} aria-describedby="emailHelp" placeholder='Enter Description' />
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="Clse">Cancel</button>
-                                        <button type="button" class="btn btn-dark" onClick={() => this.changeItem(id)}>Save changes</button>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" id="Clse">Cancel</button>
+                                        <button type="button" className="btn btn-dark" onClick={() => this.changeItem(id)}>Save changes</button>
                                     </div>
                                 </div>
                             </div>

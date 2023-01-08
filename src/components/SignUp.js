@@ -224,18 +224,18 @@ export class SignUp extends Component {
                     <label className="btn btn-outline-secondary" htmlFor="btn-check-2-outlined">Click if you want to register as an Admin</label><br />
 
                 </form>
-                <button type="button" class="btn btn-dark" style={{ marginTop: "2rem" }} data-bs-toggle="modal" data-bs-target="#registerpopup">
+                <button type="button" className="btn btn-dark" style={{ marginTop: "2rem" }} data-bs-toggle="modal" data-bs-target="#registerpopup">
                     Continue
                 </button>
 
-                <div class="modal fade" id="registerpopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">More Details To Register</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div className="modal fade" id="registerpopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h1 className="modal-title fs-5" id="exampleModalLabel">More Details To Register</h1>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">
+                            <div className="modal-body">
                                 <div className="mb-3" >
                                     <label htmlFor="exampleInputEmail1" className="form-label">Name</label>
                                     <input id="name" style={inp} aria-describedby="emailHelp" placeholder='Enter Your Name' />
@@ -253,7 +253,7 @@ export class SignUp extends Component {
                                     <input type="email" id="address" style={inp} aria-describedby="emailHelp" placeholder='Enter Your Address' />
                                 </div>
                             </div>
-                            <div class="modal-footer">
+                            <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" id="close">Close</button>
                                 <button type="button" className="btn btn-dark" onClick={() => { this.Registerbtn() }}>Register</button>
                             </div>

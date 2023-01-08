@@ -48,7 +48,6 @@ export class Admin extends Component {
                         <div style={{ display: "flex", flexWrap: "wrap", width: "66rem" }}>
                             {!this.state.loading && this.state.items.map((element) => {
                                 return (
-
                                     <AdminCard title={element.name} price={element.price} imgSrc={element.image} key={element.id} id={element.id} />
                                 );
                             })}

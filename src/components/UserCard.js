@@ -37,8 +37,8 @@ export class UserCard extends Component {
         }
         return (
             <div>
-                <div class="card" style={userStyle}>
-                    <div class="card-body">
+                <div className="card" style={userStyle}>
+                    <div className="card-body">
                         <div>
                             User ID: {userId}
                         </div>
@@ -55,7 +55,7 @@ export class UserCard extends Component {
                             Contact Number: {phone}
                         </div>
 
-                        <button type="button" class="btn btn-danger" style={{ marginTop: "1.5rem" }} onClick={() => { this.deleteCustomer(userId, pass) }}>Delete Customer</button>
+                        <button type="button" className="btn btn-danger" style={{ marginTop: "1.5rem" }} onClick={() => { this.deleteCustomer(userId, pass) }}>Delete Customer</button>
                     </div>
                 </div>
             </div>

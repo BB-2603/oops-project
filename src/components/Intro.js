@@ -5,7 +5,7 @@ export class Intro extends Component {
         return (
             <>
                 <div>
-                    Welcome to this project created by group no. 67
+                    <b> Welcome to this project created by group no.  67</b>
                 </div><br />
                 <div>
                     Here are the Team members that were involved while making this project. <br />
