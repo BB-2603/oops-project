@@ -12,7 +12,6 @@ import Intro from "./components/Intro";
 import Admin from "./components/Admin";
 import Users from "./components/Users";
 
-
 function App() {
   return (
     <>
