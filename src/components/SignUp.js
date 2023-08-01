@@ -26,7 +26,7 @@ export class SignUp extends Component {
     const war2 = document.getElementById("danger");
     const war3 = document.getElementById("success");
 
-    if (pass != conpass) {
+    if (pass !== conpass) {
       war2.innerHTML = "Password and Confirm Password must be same.";
       war2.style.display = "block";
       setTimeout(() => {
@@ -64,7 +64,7 @@ export class SignUp extends Component {
 
       document.getElementById("close").click();
     } else {
-      if (adminkey == "") {
+      if (adminkey === "") {
         let url = "http://localhost:8093/api/addUser";
         let jsonvar = {
           userId: usnm,
@@ -91,7 +91,15 @@ export class SignUp extends Component {
         })
           .then((response) => response.json())
           .then((data) => {
-            if (data.length == 0) {
+            if (data.message != null) {
+              war2.innerHTML =
+                "Username Already Taken. Please Choose Another One";
+              war2.style.display = "block";
+              setTimeout(() => {
+                war2.style.display = "none";
+              }, 1500);
+              document.getElementById("close").click();
+            } else if (data.length === 0) {
               war2.innerHTML =
                 "There was an error while registering. Please Try again";
               war2.style.display = "block";
@@ -140,7 +148,7 @@ export class SignUp extends Component {
         })
           .then((response) => response.json())
           .then((data) => {
-            if (data.length == 0) {
+            if (data.length === 0) {
               war2.innerHTML =
                 "There was an error while registering. Please Try again";
               war2.style.display = "block";
@@ -169,7 +177,7 @@ export class SignUp extends Component {
     }
   };
   myfunction = () => {
-    if (this.state.display.display == "none") {
+    if (this.state.display.display === "none") {
       this.setState({ display: { display: "block" }, margin_top: "-5rem" });
     } else {
       this.setState({ display: { display: "none" }, margin_top: "-4rem" });

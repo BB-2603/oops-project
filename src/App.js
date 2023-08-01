@@ -11,28 +11,32 @@ import ViewDetails from "./components/ViewDetails";
 import Intro from "./components/Intro";
 import Admin from "./components/Admin";
 import Users from "./components/Users";
+import { CartContext } from "./contexts/CartContext";
 
 function App() {
   return (
     <>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/oops-project" element={<Intro />} />
-          <Route path="/Users" element={<Users />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/" element={<Intro />} />
-          <Route path="/Details" element={<ViewDetails />} />
-          <Route path="/Home" element={<HomePage />} />
-          <Route path="/Details" element={<ViewDetails />} />
-          <Route path="/Cart" element={<Cart />} />
-          <Route path="/Wallet" element={<Wallet />} />
-          <Route path="/Login" element={<FirstHeader />}>
-            <Route path="" element={<SignIn />} />
-            <Route path="signUp" element={<SignUp />} />
-          </Route>
-        </Routes>
-      </Router>
+      <CartContext>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/oops-project" element={<Intro />} />
+            <Route path="/Users" element={<Users />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/" element={<Intro />} />
+            <Route path="/Details" element={<ViewDetails />} />
+            <Route path="/Home" element={<HomePage />} />
+            <Route path="/Details" element={<ViewDetails />} />
+            <Route path="/Cart" element={<Cart />} />
+            <Route path="/Wallet" element={<Wallet />} />
+            <Route path="/Login" element={<FirstHeader />}>
+              <Route path="" element={<SignIn />} />
+              <Route path="signUp" element={<SignUp />} />
+            </Route>
+            <Route element={<HomePage />} />
+          </Routes>
+        </Router>
+      </CartContext>
     </>
   );
 }

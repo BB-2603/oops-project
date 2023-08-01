@@ -20,7 +20,7 @@ export class Wallet extends Component {
   };
 
   componentDidMount() {
-    if (localStorage.getItem("loginCheck") == "true") {
+    if (localStorage.getItem("loginCheck") === "true") {
       this.setState({
         ran: JSON.parse(localStorage.getItem("user")),
       });

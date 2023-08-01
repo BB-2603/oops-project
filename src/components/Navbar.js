@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export class Navbar extends Component {
   constructor() {
@@ -15,15 +15,15 @@ export class Navbar extends Component {
   }
 
   async componentDidMount() {
-    if (localStorage.getItem("loginCheck") == "true") {
+    if (localStorage.getItem("loginCheck") === "true") {
       this.setState({ display: "none" });
       this.setState({ logout: "block" });
-      if (localStorage.getItem("logintype") == "admin") {
+      if (localStorage.getItem("logintype") === "admin") {
         document.getElementById("admhome").style.display = "block";
         document.getElementById("cushome").style.display = "none";
         document.getElementById("Cartt").style.display = "none";
         document.getElementById("wallett").style.display = "none";
-      } else if (localStorage.getItem("logintype") == "customer") {
+      } else if (localStorage.getItem("logintype") === "customer") {
         document.getElementById("admhome").style.display = "none";
         document.getElementById("aDDItm").style.display = "none";
         document.getElementById("edIT").style.display = "none";

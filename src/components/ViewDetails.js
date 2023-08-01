@@ -17,7 +17,7 @@ export class ViewDetails extends Component {
     let jsonvar = {
       _id: localStorage.getItem("tempthis"),
     };
-    //console.log(jsonvar)
+
     fetch(url, {
       mode: "cors",
       method: "POST",
@@ -32,14 +32,27 @@ export class ViewDetails extends Component {
         this.setState({ items: info[0] });
       });
 
-    if (localStorage.getItem("loginCheck") == "false") {
+    if (localStorage.getItem("loginCheck") === "false") {
       document.getElementById("AddtoCart").style.display = "block";
       document.getElementById("AddtoCart").disabled = "true";
       document.getElementById("DelteItm").style.display = "none";
-    } else if (localStorage.getItem("logintype") == "customer") {
+    } else if (localStorage.getItem("logintype") === "customer") {
       document.getElementById("AddtoCart").style.display = "block";
       document.getElementById("DelteItm").style.display = "none";
-    } else if (localStorage.getItem("logintype") == "admin") {
+      let ran = JSON.parse(localStorage.getItem("user"));
+
+      for (const key in ran[1]) {
+        if (Object.hasOwnProperty.call(ran, key)) {
+          const element = ran[1][key];
+          console.log(element[3] + " " + jsonvar._id);
+
+          if (element[3] === jsonvar._id) {
+            let addtocart = document.getElementById("AddtoCart");
+            addtocart.disabled = true;
+          }
+        }
+      }
+    } else if (localStorage.getItem("logintype") === "admin") {
       document.getElementById("AddtoCart").style.display = "none";
       document.getElementById("DelteItm").style.display = "block";
     }
@@ -74,9 +87,10 @@ export class ViewDetails extends Component {
       this.state.items.price,
       this.state.items.image,
       this.state.items._id,
+      1,
     ];
     let tempo = JSON.parse(localStorage.getItem("user"));
-    if (tempo[1].length == 0) {
+    if (tempo[1].length === 0) {
       //tempo[1] = [];
       tempo[1].push(cartItem);
       tempo[0] = this.state.items.price;
@@ -85,6 +99,8 @@ export class ViewDetails extends Component {
       tempo[0] += this.state.items.price;
     }
     localStorage.setItem("user", JSON.stringify(tempo));
+    let addtocart = document.getElementById("AddtoCart");
+    addtocart.disabled = true;
   };
 
   render() {
@@ -131,8 +147,7 @@ export class ViewDetails extends Component {
           className="alert alert-success"
           style={this.state.message}
           id="success"
-          role="alert"
-        >
+          role="alert">
           Your Item has been successfully added to cart.
         </div>
         <div style={title}>{this.state.items.name}</div>
@@ -152,8 +167,7 @@ export class ViewDetails extends Component {
               className="btn btn-outline-secondary"
               id="AddtoCart"
               style={button}
-              onClick={() => this.addedItem()}
-            >
+              onClick={() => this.addedItem()}>
               Add to Cart
             </button>
             <button
@@ -161,8 +175,7 @@ export class ViewDetails extends Component {
               className="btn btn-danger"
               id="DelteItm"
               style={button}
-              onClick={() => this.deleteItem()}
-            >
+              onClick={() => this.deleteItem()}>
               Delete Item
             </button>
           </div>

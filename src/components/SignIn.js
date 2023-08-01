@@ -21,17 +21,15 @@ export class SignIn extends Component {
     const usnm = document.getElementById("exampleInputEmail1").value;
     const pass = document.getElementById("pass").value;
     const war1 = document.getElementById("warning");
-    const war2 = document.getElementById("danger");
     const adminKey = document.getElementById("adminKey").value;
 
-    if (adminKey == "") {
+    if (adminKey === "") {
       let url = "http://localhost:8093/api/User";
       let jsonvar = {
         userId: usnm,
         password: pass,
       };
 
-      console.log("reached");
       fetch(url, {
         mode: "cors",
         method: "POST",
@@ -42,7 +40,7 @@ export class SignIn extends Component {
       })
         .then((res) => res.json())
         .then((info) => {
-          if (info.length == 0) {
+          if (info.length === 0) {
             war1.innerHTML =
               "Some Error Caused while logging in. Please Try again.";
             war1.style.display = "block";
@@ -82,7 +80,7 @@ export class SignIn extends Component {
       })
         .then((response) => response.json())
         .then((info) => {
-          if (info.length == 0) {
+          if (info.length === 0) {
             war1.innerHTML =
               "Some Error Caused while logging in. Please Try again.";
             war1.style.display = "block";
@@ -92,7 +90,6 @@ export class SignIn extends Component {
           } else {
             localStorage.setItem("loginCheck", "true");
             localStorage.setItem("logintype", "admin");
-            //localStorage.setItem("admin", JSON.stringify(info.userId));
             window.location.assign("http://localhost:3000/admin");
           }
         })
@@ -187,12 +184,14 @@ export class SignIn extends Component {
           </label>
           <br />
         </form>
-        <button
-          style={{ marginTop: "1rem", width: "6rem" }}
-          className="btn btn-dark"
-          onClick={() => this.submitbtn()}>
-          Submit
-        </button>
+        <div id="end">
+          <button
+            style={{ marginTop: "1rem", width: "6rem" }}
+            className="btn btn-dark"
+            onClick={() => this.submitbtn()}>
+            Submit
+          </button>
+        </div>
       </div>
     );
   }

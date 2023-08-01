@@ -32,10 +32,6 @@ export class HomePage extends Component {
       alignItems: "center",
     };
 
-    const pageStyle = {
-      fontSize: "1.5rem",
-    };
-
     return (
       <>
         <Outlet />

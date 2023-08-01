@@ -1,24 +1,26 @@
 import React, { Component } from "react";
 import CartCard from "./CartCard";
+import cartContext from "../contexts/CartContext";
 
 export class Cart extends Component {
+  static contextType = cartContext;
+
   constructor() {
     super();
-    if (localStorage.getItem("loginCheck") == null) {
+    if (localStorage.getItem("loginCheck") === null) {
       localStorage.setItem("loginCheck", "false");
     }
-    if (localStorage.getItem("deletethis") == null) {
+    if (localStorage.getItem("deletethis") === null) {
       localStorage.setItem("deletethis", "0");
     }
     this.state = {
       items: [],
-      total: 0,
     };
   }
 
   placeOrder = () => {
     let temp = JSON.parse(localStorage.getItem("user"));
-    if (this.state.items.length == 0) {
+    if (this.state.items.length === 0) {
       const war2 = document.getElementById("Warning");
       war2.innerHTML = "Please Add atleast one item in the cart";
       war2.style.display = "block";
@@ -34,7 +36,7 @@ export class Cart extends Component {
       }, 1500);
       console.log("Your wallet has insufficient balance");
     } else {
-      if (temp[3].length == 0) {
+      if (temp[3].length === 0) {
         temp[3].push(this.state.items);
       }
       temp[1] = [];
@@ -59,10 +61,8 @@ export class Cart extends Component {
     let ran = JSON.parse(localStorage.getItem("user"));
     this.setState({ items: ran[1] });
 
-    if (localStorage.getItem("loginCheck") == "true") {
-      this.setState({
-        total: ran[0],
-      });
+    if (localStorage.getItem("loginCheck") === "true") {
+      this.context.total = ran[0];
       document.getElementById("temp3").style.display = "block";
       document.getElementById("temp4").style.display = "none";
     } else {
@@ -110,7 +110,7 @@ export class Cart extends Component {
           </div>
           <div style={cartcard}>
             {!this.state.loading &&
-              localStorage.getItem("loginCheck") == "true" &&
+              localStorage.getItem("loginCheck") === "true" &&
               this.state.items.map((element) => {
                 return (
                   <CartCard
@@ -119,12 +119,14 @@ export class Cart extends Component {
                     imgsrc={element[2]}
                     key={element[0]}
                     id={element[3]}
+                    quantity={element[4]}
+                    cartTotal={this.state.total}
                   />
                 );
               })}
           </div>
 
-          <div style={carthead}> Cart Total: ₹{this.state.total}</div>
+          <div style={carthead}> Cart Total: ₹{this.context.total}</div>
 
           <button
             type="button"
